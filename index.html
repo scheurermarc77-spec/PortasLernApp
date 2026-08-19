@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="PORTA Lernen" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PORTA Lernen</title>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <div class="eyebrow">LERNAPP</div>
+        <h1>PORTA Lernen</h1>
+      </div>
+      <button id="settingsBtn" class="iconBtn" aria-label="Karten bearbeiten">⚙︎</button>
+    </header>
+
+    <section class="progressWrap">
+      <div id="counter">1 / 1</div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </section>
+
+    <section id="card" class="card" role="button" tabindex="0" aria-label="Lernkarte antippen">
+      <div id="front" class="side">
+        <div class="smallLabel">BESCHREIBUNG</div>
+        <h2 id="term">Meine erste Gebärde</h2>
+        <p id="description">Tippe auf ⚙︎ und füge eine Beschreibung sowie ein Bild deiner Gebärde ein.</p>
+        <div class="tapHint">Bildschirm berühren → Bild anzeigen</div>
+      </div>
+      <div id="back" class="side hidden">
+        <div class="smallLabel">GEBÄRDE</div>
+        <h2 id="termBack">Meine erste Gebärde</h2>
+        <div class="imageFrame">
+          <img id="signImage" alt="Bild der Gebärde" />
+          <div id="noImage" class="noImage">Noch kein Bild hinterlegt</div>
+        </div>
+        <div class="tapHint">Nochmals tippen → nächste Karte</div>
+      </div>
+    </section>
+
+    <nav class="controls">
+      <button id="prevBtn" class="secondary">← Zurück</button>
+      <button id="shuffleBtn" class="secondary">↻ Mischen</button>
+      <button id="nextBtn" class="primary">Weiter →</button>
+    </nav>
+  </main>
+
+  <dialog id="editor">
+    <form method="dialog" class="editorBox" id="editorForm">
+      <div class="editorHeader">
+        <div><div class="eyebrow">KARTEN</div><h2>Gebärden verwalten</h2></div>
+        <button value="cancel" class="iconBtn">✕</button>
+      </div>
+      <div id="list" class="list"></div>
+      <button type="button" id="addBtn" class="primary full">+ Neue Gebärde</button>
+      <p class="note">Die Karten und Bilder werden nur lokal auf diesem iPhone gespeichert.</p>
+    </form>
+  </dialog>
+
+  <dialog id="editCardDialog">
+    <form method="dialog" class="editorBox" id="editCardForm">
+      <div class="editorHeader"><h2>Gebärde bearbeiten</h2><button value="cancel" class="iconBtn">✕</button></div>
+      <label>Begriff<input id="editTerm" maxlength="80" placeholder="z. B. Danke" /></label>
+      <label>Beschreibung<textarea id="editDescription" rows="5" placeholder="Beschreibe die Ausführung der Gebärde …"></textarea></label>
+      <label>Bild auswählen<input id="editImage" type="file" accept="image/*" /></label>
+      <img id="preview" class="preview hidden" alt="Vorschau" />
+      <div class="editActions">
+        <button type="button" id="deleteBtn" class="danger">Löschen</button>
+        <button type="button" id="saveBtn" class="primary">Speichern</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
