@@ -40,6 +40,7 @@ let index=0;
 let showingImage=false;
 let editingId=null;
 let pendingImage=null;
+let pendingDescriptionImage=null;
 
 function load(){
   let stored=[];
@@ -64,6 +65,7 @@ function render(){
   $('term').textContent=c.term;
   $('termBack').textContent=c.term;
   $('description').textContent=c.description;
+  if(c.descriptionImage){$('descriptionImage').src=c.descriptionImage;$('descriptionImageFrame').classList.remove('hidden')}else{$('descriptionImage').removeAttribute('src');$('descriptionImageFrame').classList.add('hidden')}
   $('source').innerHTML=''; if(c.source){const span=document.createElement('span'); span.textContent=`Quelle: ${c.source}`; $('source').append(span); if(c.sourceUrl){const a=document.createElement('a'); a.href=c.sourceUrl; a.target='_blank'; a.rel='noopener'; a.textContent=' · PORTA öffnen'; a.addEventListener('click',e=>e.stopPropagation()); $('source').append(a);}}
   $('counter').textContent=`${index+1} / ${cards.length}`;
   $('progressBar').style.width=`${((index+1)/cards.length)*100}%`;
@@ -109,16 +111,27 @@ $('addBtn').onclick=()=>{
 };
 
 function openEdit(id){
-  editingId=id;pendingImage=null;
+  editingId=id;pendingImage=null;pendingDescriptionImage=null;
   const c=cards.find(x=>x.id===id);
   $('editTerm').value=c.term;
   $('editDescription').value=c.description;
   $('editImage').value='';
+  $('editDescriptionImage').value='';
   $('deleteBtn').disabled=!!c.builtin;
   $('deleteBtn').textContent=c.builtin?'Vorinstalliert':'Löschen';
+  if(c.descriptionImage){$('descriptionPreview').src=c.descriptionImage;$('descriptionPreview').classList.remove('hidden')}else{$('descriptionPreview').classList.add('hidden');$('descriptionPreview').removeAttribute('src')}
   if(c.image){$('preview').src=c.image;$('preview').classList.remove('hidden')}else{$('preview').classList.add('hidden');$('preview').removeAttribute('src')}
   $('editCardDialog').showModal()
 }
+
+
+$('editDescriptionImage').addEventListener('change',async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{
+    pendingDescriptionImage=await resizeImage(f,1280,0.84);
+    $('descriptionPreview').src=pendingDescriptionImage;$('descriptionPreview').classList.remove('hidden');
+  }catch(err){alert('Das Foto zur Beschreibung konnte nicht verarbeitet werden.')}
+});
 
 $('editImage').addEventListener('change',async e=>{
   const f=e.target.files[0];if(!f)return;
@@ -152,8 +165,9 @@ $('saveBtn').onclick=()=>{
   const c=cards.find(x=>x.id===editingId);
   c.term=$('editTerm').value.trim()||'Ohne Titel';
   c.description=$('editDescription').value.trim()||'Keine Beschreibung';
+  if(pendingDescriptionImage){c.descriptionImage=pendingDescriptionImage;c.builtin=false}
   if(pendingImage){c.image=pendingImage;c.source='Eigenes Bild';c.builtin=false}
-  save();renderList();render();$('editCardDialog').close();$('editImage').value=''
+  save();renderList();render();$('editCardDialog').close();$('editImage').value='';$('editDescriptionImage').value=''
 };
 
 $('deleteBtn').onclick=()=>{

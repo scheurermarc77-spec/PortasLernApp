@@ -32,6 +32,7 @@
         <div class="smallLabel">BESCHREIBUNG</div>
         <h2 id="term">Meine erste Gebärde</h2>
         <p id="description"></p>
+        <div id="descriptionImageFrame" class="descriptionImageFrame hidden"><img id="descriptionImage" alt="Foto zur Beschreibung" /></div>
         <div id="source" class="source"></div>
         <div class="tapHint">Bildschirm berühren → Bild anzeigen</div>
       </div>
@@ -71,9 +72,12 @@
       <div class="editorHeader"><h2>Gebärde bearbeiten</h2><button value="cancel" class="iconBtn">✕</button></div>
       <label>Begriff<input id="editTerm" maxlength="80" placeholder="z. B. Danke" /></label>
       <label>Beschreibung<textarea id="editDescription" rows="5" placeholder="Beschreibe die Ausführung der Gebärde …"></textarea></label>
-      <label>Eigenes Bild / Foto<input id="editImage" type="file" accept="image/*" /></label>
-      <div class="uploadHint">Auf dem iPhone kannst du ein Foto aufnehmen oder ein bestehendes Bild aus der Fotomediathek auswählen.</div>
-      <img id="preview" class="preview hidden" alt="Vorschau" />
+      <label>Foto zur Beschreibung<input id="editDescriptionImage" type="file" accept="image/*" /></label>
+      <div class="uploadHint">Dieses Foto wird zusammen mit der Beschreibung auf der Vorderseite der Lernkarte angezeigt.</div>
+      <img id="descriptionPreview" class="preview hidden" alt="Vorschau des Beschreibungsfotos" />
+      <label>Gebärdenbild / Foto<input id="editImage" type="file" accept="image/*" /></label>
+      <div class="uploadHint">Dieses Bild erscheint erst nach dem Antippen der Lernkarte. Auf dem iPhone kannst du jeweils ein Foto aufnehmen oder eines aus der Fotomediathek auswählen.</div>
+      <img id="preview" class="preview hidden" alt="Vorschau des Gebärdenbildes" />
       <div class="editActions">
         <button type="button" id="deleteBtn" class="danger">Löschen</button>
         <button type="button" id="saveBtn" class="primary">Speichern</button>
