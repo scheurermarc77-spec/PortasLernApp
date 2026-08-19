@@ -31,7 +31,8 @@
       <div id="front" class="side">
         <div class="smallLabel">BESCHREIBUNG</div>
         <h2 id="term">Meine erste Gebärde</h2>
-        <p id="description">Tippe auf ⚙︎ und füge eine Beschreibung sowie ein Bild deiner Gebärde ein.</p>
+        <p id="description"></p>
+        <div id="source" class="source"></div>
         <div class="tapHint">Bildschirm berühren → Bild anzeigen</div>
       </div>
       <div id="back" class="side hidden">
@@ -59,8 +60,9 @@
         <button value="cancel" class="iconBtn">✕</button>
       </div>
       <div id="list" class="list"></div>
-      <button type="button" id="addBtn" class="primary full">+ Neue Gebärde</button>
-      <p class="note">Die Karten und Bilder werden nur lokal auf diesem iPhone gespeichert.</p>
+      <button type="button" id="addBtn" class="primary full">＋ Eigene Gebärde hinzufügen</button>
+      <button type="button" id="resetBtn" class="secondary full">Vorinstallierte Karten wiederherstellen</button>
+      <p class="note">Eigene Karten und Bilder werden nur lokal auf diesem Gerät gespeichert. Vorinstallierte PORTA-Bilder werden von der Website der Stiftung Tanne geladen und benötigen Internet.</p>
     </form>
   </dialog>
 
@@ -69,7 +71,8 @@
       <div class="editorHeader"><h2>Gebärde bearbeiten</h2><button value="cancel" class="iconBtn">✕</button></div>
       <label>Begriff<input id="editTerm" maxlength="80" placeholder="z. B. Danke" /></label>
       <label>Beschreibung<textarea id="editDescription" rows="5" placeholder="Beschreibe die Ausführung der Gebärde …"></textarea></label>
-      <label>Bild auswählen<input id="editImage" type="file" accept="image/*" /></label>
+      <label>Eigenes Bild / Foto<input id="editImage" type="file" accept="image/*" /></label>
+      <div class="uploadHint">Auf dem iPhone kannst du ein Foto aufnehmen oder ein bestehendes Bild aus der Fotomediathek auswählen.</div>
       <img id="preview" class="preview hidden" alt="Vorschau" />
       <div class="editActions">
         <button type="button" id="deleteBtn" class="danger">Löschen</button>
